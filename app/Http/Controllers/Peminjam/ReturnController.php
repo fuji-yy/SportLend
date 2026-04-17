@@ -7,6 +7,7 @@ use App\Models\Borrowing;
 use App\Models\Return_model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ActivityLog;
 
 class ReturnController extends Controller
 {
@@ -65,6 +66,14 @@ class ReturnController extends Controller
             'quantity_returned' => $request->quantity_returned,
             'condition' => $request->condition,
             'notes' => $request->notes,
+        ]);
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'return',
+            'model' => 'Borrowing',
+            'model_id' => $borrowing->id,
+            'description' => 'Mencatat pengembalian untuk peminjaman #' . $borrowing->id,
         ]);
 
         // Update tool availability

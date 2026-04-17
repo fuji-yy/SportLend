@@ -7,6 +7,7 @@ use App\Models\Borrowing;
 use App\Models\Tool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ActivityLog;
 
 class BorrowingController extends Controller
 {
@@ -61,6 +62,14 @@ class BorrowingController extends Controller
             'due_date' => $request->due_date,
             'purpose' => $request->purpose,
             'status' => 'pending',
+        ]);
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'model' => 'Borrowing',
+            'model_id' => $borrowing->id,
+            'description' => 'Membuat permohonan peminjaman #' . $borrowing->id,
         ]);
 
         return redirect()->route('peminjam.borrowings.show', $borrowing)->with('success', 'Permohonan peminjaman berhasil dibuat. Tunggu persetujuan dari petugas.');
