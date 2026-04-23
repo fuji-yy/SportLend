@@ -33,8 +33,6 @@ class AuthController extends Controller
             
             if ($user->isAdmin()) {
                 return redirect('/admin/dashboard');
-            } elseif ($user->isStaff()) {
-                return redirect('/petugas/dashboard');
             } else {
                 return redirect('/peminjam/dashboard');
             }
@@ -61,22 +59,37 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
+            'role' => 'required|in:admin,peminjam',
             'password' => 'required|min:5|max:20|confirmed|regex:/^[a-zA-Z0-9*_-]+$/',
+            'admin_secret_code' => 'nullable|string',
         ], [
             'password.regex' => 'Password hanya boleh mengandung huruf, angka, bintang (*), underscore (_), dan strip (-).',
         ]);
+
+        $role = $request->role;
+
+        if ($role === 'admin') {
+            $adminCode = (string) config('registration.admin_secret_code');
+
+            if ($adminCode === '' || $request->admin_secret_code !== $adminCode) {
+                return back()
+                    ->withErrors(['admin_secret_code' => 'Kode rahasia admin tidak valid.'])
+                    ->withInput($request->except('password', 'password_confirmation', 'admin_secret_code'));
+            }
+        }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'peminjam',
+            'role' => $role,
         ]);
 
         // Automatically login the user
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect('/peminjam/dashboard')->with('success', 'Registrasi berhasil. Selamat datang!');
+        return redirect($user->isAdmin() ? '/admin/dashboard' : '/peminjam/dashboard')
+            ->with('success', 'Registrasi berhasil. Selamat datang!');
     }
 }

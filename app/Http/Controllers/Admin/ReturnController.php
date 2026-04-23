@@ -62,7 +62,7 @@ class ReturnController extends Controller
             $tool = $borrowing->tool()->lockForUpdate()->first();
 
             if ($borrowing->status !== 'approved') {
-                abort(422, 'Hanya peminjaman berstatus approved yang bisa dikembalikan.');
+                abort(422, 'Hanya peminjaman berstatus disetujui yang bisa dikembalikan.');
             }
 
             if ($borrowing->return) {
@@ -228,7 +228,7 @@ class ReturnController extends Controller
             $fineAction = null;
             if ($fine) {
                 if ($fine->status === 'paid') {
-                    $notes = trim(($fine->notes_admin ? $fine->notes_admin . "\n" : '') . 'Auto-waived karena data pengembalian dihapus pada ' . now()->format('d-m-Y H:i'));
+                    $notes = trim(($fine->notes_admin ? $fine->notes_admin . "\n" : '') . 'Dibebaskan otomatis karena data pengembalian dihapus pada ' . now()->format('d-m-Y H:i'));
                     $fine->update([
                         'status' => 'waived',
                         'notes_admin' => $notes,
@@ -259,7 +259,7 @@ class ReturnController extends Controller
                 'action' => 'update',
                 'model' => 'Fine',
                 'model_id' => $fineAction['fine']->id,
-                'description' => 'Mengubah denda menjadi waived karena data pengembalian dihapus',
+                'description' => 'Mengubah denda menjadi dibebaskan karena data pengembalian dihapus',
                 'new_data' => $fineAction['fine']->toArray(),
             ]);
         }

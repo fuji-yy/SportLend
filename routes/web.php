@@ -8,13 +8,9 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ToolController;
 use App\Http\Controllers\Admin\BorrowingController as AdminBorrowingController;
 use App\Http\Controllers\Admin\ReturnController as AdminReturnController;
-use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\FineController;
 use App\Http\Controllers\Admin\FineSettingController;
-use App\Http\Controllers\Petugas\DashboardController as PetugasDashboardController;
-use App\Http\Controllers\Petugas\BorrowingController as PetugasBorrowingController;
-use App\Http\Controllers\Petugas\ReturnController as PetugasReturnController;
-use App\Http\Controllers\Petugas\ReportController;
+use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Peminjam\DashboardController as PeminjamDashboardController;
 use App\Http\Controllers\Peminjam\ToolController as PeminjamToolController;
 use App\Http\Controllers\Peminjam\BorrowingController as PeminjamBorrowingController;
@@ -25,8 +21,6 @@ Route::get('/', function () {
         $user = auth()->user();
         if ($user->isAdmin()) {
             return redirect('/admin/dashboard');
-        } elseif ($user->isStaff()) {
-            return redirect('/petugas/dashboard');
         } else {
             return redirect('/peminjam/dashboard');
         }
@@ -67,6 +61,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->name('admin.')->gro
     // Returns Management
     Route::resource('returns', AdminReturnController::class);
 
+    // Status Management
+    Route::get('/status', [StatusController::class, 'index'])->name('status.index');
+
     // Fines Management
     Route::get('/fines', [FineController::class, 'index'])->name('fines.index');
     Route::get('/fines/{fine}', [FineController::class, 'show'])->name('fines.show');
@@ -74,34 +71,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->name('admin.')->gro
     Route::patch('/fines/{fine}/waive', [FineController::class, 'waive'])->name('fines.waive');
     Route::get('/fines-settings', [FineSettingController::class, 'edit'])->name('fines.settings.edit');
     Route::patch('/fines-settings', [FineSettingController::class, 'update'])->name('fines.settings.update');
-
-    // Activity Logs
-    Route::get('/logs', [ActivityLogController::class, 'index'])->name('logs.index');
-    Route::get('/logs/{log}', [ActivityLogController::class, 'show'])->name('logs.show');
-});
-
-// Petugas Routes
-Route::middleware(['auth', 'role:petugas'])->prefix('/petugas')->name('petugas.')->group(function () {
-    Route::get('/dashboard', [PetugasDashboardController::class, 'index'])->name('dashboard');
-
-    // Borrowing Approval
-    Route::get('/borrowings', [PetugasBorrowingController::class, 'index'])->name('borrowings.index');
-    Route::get('/borrowings/{borrowing}', [PetugasBorrowingController::class, 'show'])->name('borrowings.show');
-    Route::patch('/borrowings/{borrowing}/approve', [PetugasBorrowingController::class, 'approve'])->name('borrowings.approve');
-    Route::patch('/borrowings/{borrowing}/reject', [PetugasBorrowingController::class, 'reject'])->name('borrowings.reject');
-
-    // Return Monitoring
-    Route::get('/returns', [PetugasReturnController::class, 'index'])->name('returns.index');
-    Route::get('/returns/{borrowing}', [PetugasReturnController::class, 'show'])->name('returns.show');
-    Route::post('/returns/{borrowing}', [PetugasReturnController::class, 'store'])->name('returns.store');
-    Route::patch('/returns/{return_model}', [PetugasReturnController::class, 'update'])->name('returns.update');
-    Route::delete('/returns/{return_model}', [PetugasReturnController::class, 'destroy'])->name('returns.destroy');
-    Route::get('/returns-monitor', [PetugasReturnController::class, 'monitor'])->name('returns.monitor');
-
-    // Reports
-    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
-    Route::get('/reports/borrowing', [ReportController::class, 'borrowingReport'])->name('reports.borrowing');
-    Route::get('/reports/return', [ReportController::class, 'returnReport'])->name('reports.return');
 });
 
 // Peminjam Routes

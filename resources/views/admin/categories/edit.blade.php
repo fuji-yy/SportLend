@@ -5,7 +5,7 @@
 @section('content')
 <div class="mb-8">
     <h1 class="text-4xl font-bold text-gray-900">Edit Kategori</h1>
-    <p class="text-gray-600">Update data kategori {{ $category->name }}</p>
+    <p class="text-gray-600">Perbarui data kategori {{ $category->name }}</p>
 </div>
 
 <div class="bg-white rounded-lg shadow p-8 max-w-2xl">
@@ -26,7 +26,7 @@
         </div>
 
         <div class="flex gap-4">
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Update</button>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Perbarui</button>
             <a href="{{ route('admin.categories.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium">Batal</a>
         </div>
     </form>

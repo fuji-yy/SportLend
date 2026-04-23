@@ -23,6 +23,10 @@ class CheckRole
         array_shift($roles); // Remove $next
 
         foreach ($roles as $requiredRole) {
+            if ($requiredRole === 'admin' && $user->role === 'petugas') {
+                return $next($request);
+            }
+
             if ($user->role === $requiredRole) {
                 return $next($request);
             }

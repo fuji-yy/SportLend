@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Activity Logs')
+@section('title', 'Log Aktivitas')
 
 @section('content')
     <div class="mb-8">
-        <h1 class="text-4xl font-bold text-gray-900">Activity Logs</h1>
+        <h1 class="text-4xl font-bold text-gray-900">Log Aktivitas</h1>
         <p class="text-gray-600">Pantau semua aktivitas pengguna dalam sistem</p>
     </div>
 
@@ -36,19 +36,19 @@
                 <button type="submit"
                     class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Filter</button>
                 <a href="{{ route('admin.logs.index') }}"
-                    class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg font-medium">Reset</a>
+                    class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg font-medium">Atur Ulang</a>
             </div>
         </form>
     </div>
 
-    <div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="content-panel overflow-hidden rounded-3xl">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Waktu</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pengguna</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi Sistem</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Deskripsi</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
                     </tr>
@@ -67,7 +67,7 @@
                                         @elseif($log->action === 'reject') bg-orange-100 text-orange-800
                                         @else bg-gray-100 text-gray-800
                                         @endif
-                                    ">{{ $log->action }}</span>
+                                    ">{{ $log->action_label }}</span>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-600">{{ $log->description }}</td>
                             <td class="px-6 py-4 text-sm">

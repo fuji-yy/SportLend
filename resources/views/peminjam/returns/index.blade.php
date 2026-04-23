@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Kembalikan Alat')
+@section('title', 'Pengembalian Buku')
 
 @section('content')
 <div class="mb-8 flex justify-between items-center">
     <div>
-        <h1 class="text-4xl font-bold text-gray-900">Kembalikan Alat</h1>
-        <p class="text-gray-600">Lihat alat yang sedang anda pinjam dan kembalikan</p>
+        <h1 class="text-4xl font-bold text-gray-900">Pengembalian Buku</h1>
+        <p class="text-gray-600">Lihat buku yang sedang anda pinjam dan kembalikan</p>
     </div>
 </div>
 
@@ -15,7 +15,7 @@
         <table class="w-full">
             <thead class="bg-gray-50 border-b border-gray-200">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Alat</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Buku</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Qty</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal Pinjam</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Jatuh Tempo</th>
@@ -54,7 +54,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-6 py-4 text-center text-gray-500">Tidak ada alat yang sedang dipinjam</td>
+                        <td colspan="6" class="px-6 py-4 text-center text-gray-500">Tidak ada buku yang sedang dipinjam</td>
                     </tr>
                 @endforelse
             </tbody>

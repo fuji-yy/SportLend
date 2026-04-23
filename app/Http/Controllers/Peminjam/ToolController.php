@@ -10,9 +10,23 @@ class ToolController extends Controller
 {
     public function index()
     {
-        $tools = Tool::with('category')->where('available', '>', 0)->paginate(12);
-        $categories = Category::all();
-        
+        $query = Tool::with('category')->where('available', '>', 0);
+
+        if (request()->filled('name')) {
+            $query->where('name', 'like', '%' . request('name') . '%');
+        }
+
+        if (request()->filled('category_id')) {
+            $query->where('category_id', request('category_id'));
+        }
+
+        if (request()->filled('condition')) {
+            $query->where('condition', request('condition'));
+        }
+
+        $tools = $query->paginate(12)->withQueryString();
+        $categories = Category::orderBy('name')->get();
+
         return view('peminjam.tools.index', compact('tools', 'categories'));
     }
 
@@ -23,17 +37,6 @@ class ToolController extends Controller
 
     public function search()
     {
-        $query = request()->get('q');
-        $tools = Tool::with('category')
-            ->where('available', '>', 0)
-            ->where(function ($q) use ($query) {
-                $q->where('name', 'like', "%{$query}%")
-                  ->orWhere('code', 'like', "%{$query}%")
-                  ->orWhere('description', 'like', "%{$query}%");
-            })
-            ->paginate(12);
-
-        $categories = Category::all();
-        return view('peminjam.tools.index', compact('tools', 'categories'));
+        return $this->index();
     }
 }

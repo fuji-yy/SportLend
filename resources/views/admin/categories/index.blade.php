@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Manage Kategori')
+@section('title', 'Kelola Kategori')
 
 @section('content')
     <div class="mb-8 flex justify-between items-center">
         <div>
-            <h1 class="text-4xl font-bold text-gray-900">Manage Kategori</h1>
-            <p class="text-gray-600">Kelola kategori alat SportLend</p>
+            <h1 class="text-4xl font-bold text-gray-900">Kelola Kategori</h1>
+            <p class="text-gray-600">Kelola kategori buku Bookify</p>
         </div>
         <a href="{{ route('admin.categories.create') }}"
             class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium">+ Tambah Kategori</a>
@@ -22,7 +22,7 @@
             <button type="submit"
                 class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Cari</button>
             <a href="{{ route('admin.categories.index') }}"
-                class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg font-medium">Reset</a>
+                class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg font-medium">Atur Ulang</a>
         </form>
     </div>
 

@@ -9,12 +9,12 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
+        <div class="content-panel lg:col-span-2 rounded-3xl p-6">
             <h2 class="text-xl font-bold mb-4">Ringkasan Denda</h2>
             <div class="grid grid-cols-2 gap-4 text-sm">
                 <p class="text-gray-600">Peminjam</p>
                 <p class="font-medium">{{ $fine->borrowing->user->name }}</p>
-                <p class="text-gray-600">Alat</p>
+                <p class="text-gray-600">Buku</p>
                 <p class="font-medium">{{ $fine->borrowing->tool->name }}</p>
                 <p class="text-gray-600">Jumlah Pinjam</p>
                 <p class="font-medium">{{ $fine->borrowing->quantity }}</p>
@@ -35,21 +35,21 @@
                         @elseif($fine->status === 'paid') bg-green-100 text-green-800
                         @else bg-gray-100 text-gray-800
                         @endif
-                    ">{{ $fine->status }}</span>
+                    ">{{ $fine->status_label }}</span>
                 </p>
                 <p class="text-gray-600">Dibayar pada</p>
                 <p class="font-medium">{{ $fine->paid_at ? $fine->paid_at->format('d-m-Y H:i') : '-' }}</p>
             </div>
 
             @if($fine->notes_admin)
-                <div class="mt-4 p-4 bg-gray-50 rounded">
+                <div class="mt-4 rounded-2xl bg-gray-50 p-4">
                     <p class="text-gray-600 text-sm">Catatan Admin</p>
                     <p class="text-gray-900">{{ $fine->notes_admin }}</p>
                 </div>
             @endif
         </div>
 
-        <div class="bg-white rounded-lg shadow p-6 h-fit">
+        <div class="content-panel h-fit rounded-3xl p-6">
             <h3 class="text-lg font-bold mb-4">Aksi</h3>
 
             @if($fine->status !== 'paid')
@@ -58,28 +58,25 @@
                     @csrf
                     @method('PATCH')
                     <textarea name="notes_admin" rows="2" placeholder="Catatan (opsional)"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-2"></textarea>
+                        class="mb-2 w-full rounded-lg border border-gray-300 px-3 py-2"></textarea>
                     <button type="submit"
-                        class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium">Tandai
-                        Lunas</button>
+                        class="w-full rounded-lg bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700">Tandai Lunas</button>
                 </form>
             @endif
 
             @if($fine->status !== 'waived')
                 <form method="POST" action="{{ route('admin.fines.waive', $fine) }}" class="need-confirm"
-                    data-confirm-message="Waive denda ini?">
+                    data-confirm-message="Bebaskan denda ini?">
                     @csrf
                     @method('PATCH')
-                    <textarea name="notes_admin" rows="3" required placeholder="Alasan waive (wajib)"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-2"></textarea>
+                    <textarea name="notes_admin" rows="3" required placeholder="Alasan pembebasan denda (wajib)"
+                        class="mb-2 w-full rounded-lg border border-gray-300 px-3 py-2"></textarea>
                     <button type="submit"
-                        class="w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium">Waive
-                        Denda</button>
+                        class="w-full rounded-lg bg-gray-700 px-4 py-2 font-medium text-white hover:bg-gray-800">Dibebaskan</button>
                 </form>
             @endif
 
-            <a href="{{ route('admin.fines.index') }}" class="inline-block mt-4 text-blue-600 hover:text-blue-800">← Kembali
-                ke daftar denda</a>
+            <a href="{{ route('admin.fines.index') }}" class="mt-4 inline-block text-blue-600 hover:text-blue-800">< Kembali ke daftar denda</a>
         </div>
     </div>
 @endsection

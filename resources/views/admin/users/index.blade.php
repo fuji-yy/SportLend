@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Manage Pengguna')
+@section('title', 'Kelola Pengguna')
 
 @section('content')
     <div class="mb-8 flex justify-between items-center">
         <div>
-            <h1 class="text-4xl font-bold text-gray-900">Manage Pengguna</h1>
-            <p class="text-gray-600">Kelola semua pengguna sistem SportLend</p>
+            <h1 class="text-4xl font-bold text-gray-900">Kelola Pengguna</h1>
+            <p class="text-gray-600">Kelola semua anggota dan pengguna sistem Bookify</p>
         </div>
         <a href="{{ route('admin.users.create') }}"
             class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium">+ Tambah Pengguna</a>
@@ -22,7 +22,7 @@
             <button type="submit"
                 class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Cari</button>
             <a href="{{ route('admin.users.index') }}"
-                class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg font-medium">Reset</a>
+                class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg font-medium">Atur Ulang</a>
         </form>
     </div>
 
@@ -45,7 +45,6 @@
                             <td class="px-6 py-4 text-sm">
                                 <span class="px-3 py-1 rounded-full text-xs font-medium
                                         @if($user->role === 'admin') bg-red-100 text-red-800
-                                        @elseif($user->role === 'petugas') bg-yellow-100 text-yellow-800
                                         @else bg-green-100 text-green-800
                                         @endif
                                     ">{{ $user->role }}</span>

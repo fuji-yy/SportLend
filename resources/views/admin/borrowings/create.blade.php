@@ -12,7 +12,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-8 max-w-3xl">
+    <div class="content-panel max-w-3xl rounded-3xl p-8">
         <form method="POST" action="{{ route('admin.borrowings.store') }}">
             @csrf
 
@@ -31,11 +31,11 @@
                 </div>
 
                 <div>
-                    <label for="tool_id" class="block text-gray-700 font-medium mb-2">Alat <span
+                    <label for="tool_id" class="block text-gray-700 font-medium mb-2">Buku <span
                             class="text-red-500">*</span></label>
                     <select id="tool_id" name="tool_id" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('tool_id') border-red-500 @enderror">
-                        <option value="">Pilih Alat</option>
+                        <option value="">Pilih Buku</option>
                         @foreach($tools as $tool)
                             <option value="{{ $tool->id }}" @selected(old('tool_id') == $tool->id)>{{ $tool->name }} (tersedia:
                                 {{ $tool->available }})</option>
@@ -55,10 +55,9 @@
                             class="text-red-500">*</span></label>
                     <select id="status" name="status" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('status') border-red-500 @enderror">
-                        <option value="pending" @selected(old('status') === 'pending')>pending</option>
-                        <option value="approved" @selected(old('status') === 'approved')>approved</option>
-                        <option value="rejected" @selected(old('status') === 'rejected')>rejected</option>
-                        <option value="returned" @selected(old('status') === 'returned')>returned</option>
+                        @foreach(\App\Models\Borrowing::STATUS_LABELS as $value => $label)
+                            <option value="{{ $value }}" @selected(old('status') === $value)>{{ $label }}</option>
+                        @endforeach
                     </select>
                 </div>
 

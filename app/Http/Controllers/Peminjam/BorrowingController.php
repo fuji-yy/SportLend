@@ -51,7 +51,7 @@ class BorrowingController extends Controller
         $tool = Tool::findOrFail($request->tool_id);
 
         if ($request->quantity > $tool->available) {
-            return back()->withErrors(['quantity' => 'Jumlah alat tidak tersedia.']);
+            return back()->withErrors(['quantity' => 'Jumlah buku tidak tersedia.']);
         }
 
         $borrowing = Borrowing::create([
@@ -72,7 +72,7 @@ class BorrowingController extends Controller
             'description' => 'Membuat permohonan peminjaman #' . $borrowing->id,
         ]);
 
-        return redirect()->route('peminjam.borrowings.show', $borrowing)->with('success', 'Permohonan peminjaman berhasil dibuat. Tunggu persetujuan dari petugas.');
+        return redirect()->route('peminjam.borrowings.show', $borrowing)->with('success', 'Permohonan peminjaman berhasil dibuat. Tunggu persetujuan dari admin.');
     }
 
     public function cancel(Borrowing $borrowing)
@@ -82,7 +82,7 @@ class BorrowingController extends Controller
         }
 
         if ($borrowing->status !== 'pending') {
-            return back()->with('error', 'Hanya peminjaman dengan status pending yang bisa dibatalkan.');
+            return back()->with('error', 'Hanya peminjaman dengan status menunggu yang bisa dibatalkan.');
         }
 
         $borrowing->update(['status' => 'rejected']);

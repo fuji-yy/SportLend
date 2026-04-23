@@ -38,7 +38,7 @@ class BorrowingController extends Controller
             $tool = Tool::query()->lockForUpdate()->findOrFail($request->tool_id);
 
             if ($request->status === 'approved' && $tool->available < $request->quantity) {
-                abort(422, 'Stok alat tidak mencukupi untuk status approved.');
+                abort(422, 'Stok buku tidak mencukupi untuk status disetujui.');
             }
 
             $borrowing = Borrowing::create([
@@ -131,7 +131,7 @@ class BorrowingController extends Controller
             // Apply new approved allocation if needed.
             if ($request->status === 'approved') {
                 if ($newTool->available < $request->quantity) {
-                    abort(422, 'Stok alat tidak mencukupi untuk status approved.');
+                    abort(422, 'Stok buku tidak mencukupi untuk status disetujui.');
                 }
 
                 $newTool->decrement('available', $request->quantity);
@@ -176,7 +176,7 @@ class BorrowingController extends Controller
             if ($request->status === 'approved' && $oldStatus !== 'approved') {
 
                 if ($tool->available < $borrowing->quantity) {
-                    abort(422, 'Stok alat tidak mencukupi untuk disetujui.');
+                    abort(422, 'Stok buku tidak mencukupi untuk disetujui.');
                 }
 
                 $tool->decrement('available', $borrowing->quantity);
@@ -207,7 +207,7 @@ class BorrowingController extends Controller
     public function destroy(Borrowing $borrowing)
     {
         if (!in_array($borrowing->status, ['pending', 'rejected'], true)) {
-            return back()->with('error', 'Hanya peminjaman dengan status pending atau rejected yang bisa dihapus.');
+            return back()->with('error', 'Hanya peminjaman dengan status menunggu atau ditolak yang bisa dihapus.');
         }
 
         $borrowing->delete();

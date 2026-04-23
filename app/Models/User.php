@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function isStaff()
     {
-        return $this->role === 'petugas';
+        return false;
     }
 
     public function isBorrower()

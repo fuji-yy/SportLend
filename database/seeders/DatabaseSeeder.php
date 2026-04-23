@@ -28,16 +28,6 @@ class DatabaseSeeder extends Seeder
             'address' => 'Jl. Admin No. 1',
         ]);
 
-        // Create Staff User
-        User::create([
-            'name' => 'petugas',
-            'email' => 'petugas@gmail.com',
-            'password' => Hash::make('petugas123'),
-            'role' => 'petugas',
-            'phone' => '082345678901',
-            'address' => 'Jl. Petugas No. 2',
-        ]);
-
         // Create Sample Borrowers
         User::create([
             'name' => 'fuji',
@@ -59,10 +49,10 @@ class DatabaseSeeder extends Seeder
 
         // Create Categories
         $categories = [
-            ['name' => 'Peralatan Elektronik', 'description' => 'Alat-alat yang menggunakan listrik'],
-            ['name' => 'Peralatan Olahraga', 'description' => 'Alat-alat untuk kegiatan olahraga'],
-            ['name' => 'Peralatan Kampus', 'description' => 'Alat-alat untuk aktivitas kampus'],
-            ['name' => 'Peralatan Multimedia', 'description' => 'Alat-alat untuk presentasi dan recording'],
+            ['name' => 'Fiksi', 'description' => 'Koleksi novel, cerpen, dan karya sastra populer'],
+            ['name' => 'Nonfiksi', 'description' => 'Buku pengetahuan, pengembangan diri, dan referensi umum'],
+            ['name' => 'Pendidikan', 'description' => 'Buku pendukung belajar, akademik, dan materi pelajaran'],
+            ['name' => 'Teknologi', 'description' => 'Buku komputer, pemrograman, dan inovasi digital'],
         ];
 
         foreach ($categories as $cat) {
@@ -71,12 +61,12 @@ class DatabaseSeeder extends Seeder
 
         // Create Tools
         $tools = [
-            ['category_id' => 2, 'code' => 'SPORT001', 'name' => 'Bola Sepak', 'description' => 'Bola sepak standar internasional FIFA', 'quantity' => 20, 'available' => 20, 'condition' => 'baik'],
-            ['category_id' => 2, 'code' => 'SPORT002', 'name' => 'Bola Voli', 'description' => 'Bola voli standar internasional', 'quantity' => 18, 'available' => 18, 'condition' => 'baik'],
-            ['category_id' => 2, 'code' => 'SPORT003', 'name' => 'Bola Basket', 'description' => 'Bola basket standar internasional NBA', 'quantity' => 15, 'available' => 15, 'condition' => 'baik'],
-            ['category_id' => 2, 'code' => 'SPORT004', 'name' => 'Bola Handball', 'description' => 'Bola handball standar untuk permainan', 'quantity' => 12, 'available' => 12, 'condition' => 'baik'],
-            ['category_id' => 2, 'code' => 'SPORT005', 'name' => 'Matras', 'description' => 'Matras untuk senam dan latihan', 'quantity' => 25, 'available' => 25, 'condition' => 'baik'],
-            ['category_id' => 2, 'code' => 'SPORT006', 'name' => 'Cone', 'description' => 'Cone untuk latihan dribbling dan agility', 'quantity' => 40, 'available' => 40, 'condition' => 'baik'],
+            ['category_id' => 1, 'code' => 'BOOK001', 'name' => 'Laskar Pelangi', 'description' => 'Novel inspiratif karya Andrea Hirata', 'quantity' => 20, 'available' => 20, 'condition' => 'baik'],
+            ['category_id' => 1, 'code' => 'BOOK002', 'name' => 'Bumi Manusia', 'description' => 'Novel klasik Indonesia karya Pramoedya Ananta Toer', 'quantity' => 18, 'available' => 18, 'condition' => 'baik'],
+            ['category_id' => 2, 'code' => 'BOOK003', 'name' => 'Atomic Habits', 'description' => 'Buku pengembangan diri tentang membangun kebiasaan baik', 'quantity' => 15, 'available' => 15, 'condition' => 'baik'],
+            ['category_id' => 3, 'code' => 'BOOK004', 'name' => 'Matematika Dasar', 'description' => 'Buku referensi konsep matematika dasar untuk pelajar', 'quantity' => 12, 'available' => 12, 'condition' => 'baik'],
+            ['category_id' => 4, 'code' => 'BOOK005', 'name' => 'Clean Code', 'description' => 'Buku pemrograman tentang praktik menulis kode yang rapi', 'quantity' => 25, 'available' => 25, 'condition' => 'baik'],
+            ['category_id' => 4, 'code' => 'BOOK006', 'name' => 'Pengantar Basis Data', 'description' => 'Buku dasar perancangan dan pengelolaan basis data', 'quantity' => 40, 'available' => 40, 'condition' => 'baik'],
         ];
 
         foreach ($tools as $tool) {

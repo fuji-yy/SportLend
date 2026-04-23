@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Borrowing;
 use App\Models\Tool;
-use App\Models\ActivityLog;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -17,18 +15,17 @@ class DashboardController extends Controller
         $totalTools = Tool::sum('quantity');
         $activeBorrowings = Borrowing::where('status', 'approved')->count();
         $pendingBorrowings = Borrowing::where('status', 'pending')->count();
-        
-        $recentActivities = ActivityLog::with('user')
+        $recentBorrowings = Borrowing::with(['user', 'tool'])
             ->latest()
-            ->limit(10)
+            ->limit(8)
             ->get();
-
+        
         return view('admin.dashboard', compact(
             'totalUsers',
             'totalTools',
             'activeBorrowings',
             'pendingBorrowings',
-            'recentActivities'
+            'recentBorrowings'
         ));
     }
 }

@@ -9,6 +9,12 @@ class Fine extends Model
 {
     use HasFactory;
 
+    public const STATUS_LABELS = [
+        'unpaid' => 'Belum Lunas',
+        'paid' => 'Lunas',
+        'waived' => 'Dibebaskan',
+    ];
+
     protected $fillable = [
         'borrowing_id',
         'days_late',
@@ -27,5 +33,15 @@ class Fine extends Model
     public function borrowing()
     {
         return $this->belongsTo(Borrowing::class);
+    }
+
+    public function getStatusLabelAttribute(): string
+    {
+        return self::STATUS_LABELS[$this->status] ?? ucfirst((string) $this->status);
+    }
+
+    public static function statusOptions(): array
+    {
+        return self::STATUS_LABELS;
     }
 }

@@ -36,7 +36,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => ['required', 'min:5', 'max:20', 'regex:/^[a-zA-Z0-9*_-]+$/'],
-            'role' => 'required|in:admin,petugas,peminjam',
+            'role' => 'required|in:admin,peminjam',
         ], [
             'password.regex' => 'Password hanya boleh mengandung huruf, angka, bintang (*), underscore (_) dan strip (-).',
         ]);
@@ -70,7 +70,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'role' => 'required|in:admin,petugas,peminjam',
+            'role' => 'required|in:admin,peminjam',
             'password' => ['nullable', 'min:5', 'max:20', 'regex:/^[a-zA-Z0-9*_-]+$/'],
         ], [
             'password.regex' => 'Password hanya boleh mengandung huruf, angka, bintang (*), underscore (_) dan strip (-).',

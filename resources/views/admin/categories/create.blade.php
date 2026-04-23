@@ -5,7 +5,7 @@
 @section('content')
 <div class="mb-8">
     <h1 class="text-4xl font-bold text-gray-900">Tambah Kategori</h1>
-    <p class="text-gray-600">Buat kategori alat baru</p>
+    <p class="text-gray-600">Buat kategori buku baru</p>
 </div>
 
 <div class="bg-white rounded-lg shadow p-8 max-w-2xl">

@@ -34,7 +34,7 @@ class FineController extends Controller
         }
 
         $fines = $query->latest()->paginate(15)->withQueryString();
-        $users = User::whereIn('role', ['peminjam', 'admin', 'petugas'])->orderBy('name')->get();
+        $users = User::whereIn('role', ['peminjam', 'admin'])->orderBy('name')->get();
 
         return view('admin.fines.index', compact('fines', 'users'));
     }
@@ -92,11 +92,11 @@ class FineController extends Controller
             'action' => 'update',
             'model' => 'Fine',
             'model_id' => $fine->id,
-            'description' => 'Menandai denda sebagai waived untuk peminjaman #' . $fine->borrowing_id,
+            'description' => 'Membebaskan denda untuk peminjaman #' . $fine->borrowing_id,
             'old_data' => $oldData,
             'new_data' => $fine->fresh()->toArray(),
         ]);
 
-        return redirect()->route('admin.fines.show', $fine)->with('success', 'Denda berhasil di-waive.');
+        return redirect()->route('admin.fines.show', $fine)->with('success', 'Denda berhasil dibebaskan.');
     }
 }

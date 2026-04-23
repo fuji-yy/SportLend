@@ -6,7 +6,7 @@
     <div class="mb-8">
         <h1 class="text-4xl font-bold text-gray-900">Detail Peminjaman</h1>
         <p class="text-gray-600 mb-10">Kelola peminjaman #{{ $borrowing->id }}</p>
-        <a href="{{ route('admin.borrowings.index') }}"
+        <a href="{{ request('return_to', route('admin.status.index', ['tab' => 'peminjaman'])) }}"
             class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-lg shadow">
             ← Kembali
         </a>
@@ -23,7 +23,7 @@
                         <p class="text-lg font-medium">{{ $borrowing->user->name }}</p>
                     </div>
                     <div>
-                        <p class="text-gray-600 text-sm">Alat</p>
+                        <p class="text-gray-600 text-sm">Buku</p>
                         <p class="text-lg font-medium">{{ $borrowing->tool->name }}</p>
                     </div>
                     <div>
@@ -38,7 +38,7 @@
                                 @elseif($borrowing->status === 'rejected') bg-red-100 text-red-800
                                 @else bg-blue-100 text-blue-800
                                 @endif
-                            ">{{ $borrowing->status }}</span>
+                            ">{{ $borrowing->status_label }}</span>
                     </div>
                     <div>
                         <p class="text-gray-600 text-sm">Tanggal Pinjam</p>
@@ -83,7 +83,7 @@
     </div>
 
     <div class="mt-6">
-        <a href="{{ route('admin.borrowings.edit', $borrowing) }}"
+        <a href="{{ route('admin.borrowings.edit', ['borrowing' => $borrowing, 'return_to' => request('return_to')]) }}"
             class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Edit</a>
         @if(in_array($borrowing->status, ['pending', 'rejected']))
             <form action="{{ route('admin.borrowings.destroy', $borrowing) }}" method="POST" class="inline need-confirm mr-4"

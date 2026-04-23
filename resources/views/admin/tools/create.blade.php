@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Alat')
+@section('title', 'Tambah Buku')
 
 @section('content')
 <div class="mb-8">
-    <h1 class="text-4xl font-bold text-gray-900">Tambah Alat</h1>
-    <p class="text-gray-600">Daftar alat baru ke sistem SportLend</p>
+    <h1 class="text-4xl font-bold text-gray-900">Tambah Buku</h1>
+    <p class="text-gray-600">Daftarkan buku baru ke sistem Bookify</p>
 </div>
 
 <div class="bg-white rounded-lg shadow p-8 max-w-2xl">
-    <form method="POST" action="{{ route('admin.tools.store') }}">
+    <form method="POST" action="{{ route('admin.tools.store') }}" enctype="multipart/form-data">
         @csrf
         
         <div class="mb-6">
@@ -24,13 +24,13 @@
         </div>
 
         <div class="mb-6">
-            <label for="code" class="block text-gray-700 font-medium mb-2">Kode Alat <span class="text-red-500">*</span></label>
+            <label for="code" class="block text-gray-700 font-medium mb-2">Kode Buku <span class="text-red-500">*</span></label>
             <input type="text" id="code" name="code" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('code') border-red-500 @enderror" value="{{ old('code') }}" placeholder="Contoh: ALT001">
             @error('code') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
         <div class="mb-6">
-            <label for="name" class="block text-gray-700 font-medium mb-2">Nama Alat <span class="text-red-500">*</span></label>
+            <label for="name" class="block text-gray-700 font-medium mb-2">Judul Buku <span class="text-red-500">*</span></label>
             <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('name') border-red-500 @enderror" value="{{ old('name') }}">
             @error('name') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
@@ -38,6 +38,13 @@
         <div class="mb-6">
             <label for="description" class="block text-gray-700 font-medium mb-2">Deskripsi</label>
             <textarea id="description" name="description" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" rows="3">{{ old('description') }}</textarea>
+        </div>
+
+        <div class="mb-6">
+            <label for="cover_image" class="block text-gray-700 font-medium mb-2">Foto Buku</label>
+            <input type="file" id="cover_image" name="cover_image" accept=".png,.jpg,.jpeg,image/png,image/jpeg" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('cover_image') border-red-500 @enderror bg-white">
+            <p class="text-xs text-gray-600 mt-2">Unggah gambar sampul dari perangkat. Format yang didukung: PNG, JPG, JPEG. Maksimal 2 MB.</p>
+            @error('cover_image') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
         <div class="mb-6">

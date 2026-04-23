@@ -3,9 +3,12 @@
 @section('title', 'Buat Peminjaman')
 
 @section('content')
+@php
+    $selectedToolId = old('tool_id', request('tool_id'));
+@endphp
 <div class="mb-8">
     <h1 class="text-4xl font-bold text-gray-900">Buat Peminjaman Baru</h1>
-    <p class="text-gray-600">Ajukan permintaan peminjaman alat</p>
+    <p class="text-gray-600">Ajukan permintaan peminjaman buku</p>
 </div>
 
 <div class="bg-white rounded-lg shadow p-8 max-w-2xl">
@@ -13,11 +16,11 @@
         @csrf
         
         <div class="mb-6">
-            <label for="tool_id" class="block text-gray-700 font-medium mb-2">Pilih Alat <span class="text-red-500">*</span></label>
+            <label for="tool_id" class="block text-gray-700 font-medium mb-2">Pilih Buku <span class="text-red-500">*</span></label>
             <select id="tool_id" name="tool_id" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('tool_id') border-red-500 @enderror">
-                <option value="">Pilih Alat</option>
+                <option value="">Pilih Buku</option>
                 @foreach($tools as $tool)
-                    <option value="{{ $tool->id }}" @if(old('tool_id') == $tool->id) selected @endif>
+                    <option value="{{ $tool->id }}" @selected((string) $selectedToolId === (string) $tool->id)>
                         {{ $tool->name }} ({{ $tool->available }} tersedia)
                     </option>
                 @endforeach

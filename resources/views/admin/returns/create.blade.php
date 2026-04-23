@@ -5,7 +5,7 @@
 @section('content')
 <div class="mb-8">
     <h1 class="text-4xl font-bold text-gray-900">Catat Pengembalian</h1>
-    <p class="text-gray-600">Catat pengembalian alat dari peminjam</p>
+    <p class="text-gray-600">Catat pengembalian buku dari peminjam</p>
      <a href="{{ route('admin.returns.index') }}"
             class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-lg shadow">
             ← Kembali
@@ -36,7 +36,7 @@
         </div>
 
         <div class="mb-6">
-            <label for="condition" class="block text-gray-700 font-medium mb-2">Kondisi Alat <span class="text-red-500">*</span></label>
+            <label for="condition" class="block text-gray-700 font-medium mb-2">Kondisi Buku <span class="text-red-500">*</span></label>
             <select id="condition" name="condition" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('condition') border-red-500 @enderror">
                 <option value="">Pilih Kondisi</option>
                 <option value="baik" @if(old('condition') === 'baik') selected @endif>Baik</option>

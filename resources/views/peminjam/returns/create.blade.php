@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Buat Pengembalian Alat')
+@section('title', 'Buat Pengembalian Buku')
 
 @section('content')
 <div class="mb-8 flex justify-between items-center">
     <div>
-        <h1 class="text-4xl font-bold text-gray-900">Buat Pengembalian Alat</h1>
-        <p class="text-gray-600">Pilih alat yang akan dikembalikan dan isi form pengembalian</p>
+        <h1 class="text-4xl font-bold text-gray-900">Buat Pengembalian Buku</h1>
+        <p class="text-gray-600">Pilih buku yang akan dikembalikan dan isi form pengembalian</p>
     </div>
     <a href="{{ route('peminjam.returns.index') }}" class="text-blue-600 hover:text-blue-800 font-medium">← Kembali</a>
 </div>
@@ -60,7 +60,7 @@
                     <input type="hidden" id="borrowing_id_field" name="borrowing_id">
                     
                     <div class="mb-4 p-3 bg-gray-50 rounded">
-                        <p class="text-sm text-gray-600">Alat Terpilih</p>
+                        <p class="text-sm text-gray-600">Buku Terpilih</p>
                         <p class="font-bold text-gray-900" id="selected_tool">-</p>
                     </div>
 
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="condition" class="block text-gray-700 font-medium mb-2">Kondisi Alat <span class="text-red-500">*</span></label>
+                        <label for="condition" class="block text-gray-700 font-medium mb-2">Kondisi Buku <span class="text-red-500">*</span></label>
                         <select id="condition" name="condition" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('condition') border-red-500 @enderror">
                             <option value="">Pilih Kondisi</option>
                             <option value="baik" @if(old('condition') === 'baik') selected @endif>Baik</option>
@@ -89,7 +89,7 @@
                     </div>
 
                     <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
-                        Kembalikan Alat
+                        Kembalikan Buku
                     </button>
                 </form>
             </div>

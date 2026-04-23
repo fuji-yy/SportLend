@@ -8,7 +8,7 @@
         <p class="text-gray-600">Informasi peminjaman #{{ $borrowing->id }}</p>
     </div>
         <div class="mb-6">
-            <a href="{{ route('peminjam.borrowings.index') }}"
+            <a href="{{ url()->previous() !== url()->current() ? url()->previous() : route('peminjam.borrowings.index') }}"
                     class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-lg shadow">
                     ← Kembali
                 </a>
@@ -16,11 +16,11 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="md:col-span-2">
-            <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <div class="content-panel rounded-3xl p-6 mb-6">
                 <h2 class="text-2xl font-bold mb-4">Informasi Peminjaman</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <p class="text-gray-600 text-sm">Alat</p>
+                        <p class="text-gray-600 text-sm">Buku</p>
                         <p class="text-lg font-medium">{{ $borrowing->tool->name }}</p>
                     </div>
                     <div>
@@ -39,7 +39,7 @@
                             @elseif($borrowing->status === 'rejected') bg-red-100 text-red-800
                             @else bg-blue-100 text-blue-800
                             @endif
-                        ">{{ $borrowing->status }}</span>
+                        ">{{ $borrowing->status_label }}</span>
                     </div>
                     <div>
                         <p class="text-gray-600 text-sm">Tanggal Pinjam</p>
@@ -79,7 +79,7 @@
                             <p class="font-semibold text-red-700">Rp
                                 {{ number_format($borrowing->fine->amount_total, 0, ',', '.') }}</p>
                             <p class="text-gray-600">Status</p>
-                            <p class="font-medium">{{ $borrowing->fine->status }}</p>
+                            <p class="font-medium">{{ $borrowing->fine->status_label }}</p>
                         </div>
                     </div>
                 @endif
@@ -88,7 +88,7 @@
 
         <div>
             @if($borrowing->status === 'pending')
-                <div class="bg-white rounded-lg shadow p-6">
+                <div class="content-panel rounded-3xl p-6">
                     <h3 class="text-lg font-bold mb-4">Tindakan</h3>
                     <form method="POST" action="{{ route('peminjam.borrowings.cancel', $borrowing) }}" class="need-confirm"
                         data-confirm-message="Batalkan permintaan peminjaman ini?">
@@ -99,9 +99,9 @@
                     </form>
                 </div>
             @elseif($borrowing->status === 'approved')
-                <div class="bg-white rounded-lg shadow p-6">
-                    <h3 class="text-lg font-bold mb-4">Kembalikan Alat</h3>
-                    <p class="text-gray-600 mb-4">Alat sudah disetujui. Kembalikan alat sesuai jatuh tempo.</p>
+                <div class="content-panel rounded-3xl p-6">
+                    <h3 class="text-lg font-bold mb-4">Pengembalian Buku</h3>
+                    <p class="text-gray-600 mb-4">Buku sudah disetujui. Kembalikan buku sesuai jatuh tempo.</p>
                     <a href="{{ route('peminjam.returns.show', $borrowing) }}"
                         class="block text-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium">Kembalikan
                         Sekarang</a>
@@ -114,5 +114,5 @@
         </div>
     </div>
 
-   
+
 @endsection

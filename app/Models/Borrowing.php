@@ -9,6 +9,13 @@ class Borrowing extends Model
 {
     use HasFactory;
 
+    public const STATUS_LABELS = [
+        'pending' => 'Menunggu',
+        'approved' => 'Disetujui',
+        'rejected' => 'Ditolak',
+        'returned' => 'Selesai',
+    ];
+
     protected $fillable = ['user_id', 'tool_id', 'quantity', 'borrow_date', 'due_date', 'status', 'purpose', 'notes'];
 
     protected $casts = [
@@ -34,5 +41,10 @@ class Borrowing extends Model
     public function fine()
     {
         return $this->hasOne(Fine::class);
+    }
+
+    public function getStatusLabelAttribute(): string
+    {
+        return self::STATUS_LABELS[$this->status] ?? ucfirst((string) $this->status);
     }
 }

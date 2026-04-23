@@ -6,13 +6,13 @@
     <div class="mb-8">
         <h1 class="text-4xl font-bold text-gray-900">Edit Peminjaman</h1>
         <p class="text-gray-600">Perbarui data peminjaman #{{ $borrowing->id }}</p>
-           <a href="{{ route('admin.borrowings.index') }}"
+           <a href="{{ request('return_to', route('admin.status.index', ['tab' => 'peminjaman'])) }}"
             class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-lg shadow">
             ← Kembali
         </a>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-8 max-w-3xl">
+    <div class="content-panel max-w-3xl rounded-3xl p-8">
         <form method="POST" action="{{ route('admin.borrowings.update', $borrowing) }}">
             @csrf
             @method('PUT')
@@ -32,11 +32,11 @@
                 </div>
 
                 <div>
-                    <label for="tool_id" class="block text-gray-700 font-medium mb-2">Alat <span
+                    <label for="tool_id" class="block text-gray-700 font-medium mb-2">Buku <span
                             class="text-red-500">*</span></label>
                     <select id="tool_id" name="tool_id" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('tool_id') border-red-500 @enderror">
-                        <option value="">Pilih Alat</option>
+                        <option value="">Pilih Buku</option>
                         @foreach($tools as $tool)
                             <option value="{{ $tool->id }}" @selected(old('tool_id', $borrowing->tool_id) == $tool->id)>
                                 {{ $tool->name }} (tersedia: {{ $tool->available }})</option>
@@ -57,10 +57,9 @@
                             class="text-red-500">*</span></label>
                     <select id="status" name="status" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('status') border-red-500 @enderror">
-                        <option value="pending" @selected(old('status', $borrowing->status) === 'pending')>pending</option>
-                        <option value="approved" @selected(old('status', $borrowing->status) === 'approved')>approved</option>
-                        <option value="rejected" @selected(old('status', $borrowing->status) === 'rejected')>rejected</option>
-                        <option value="returned" @selected(old('status', $borrowing->status) === 'returned')>returned</option>
+                        @foreach(\App\Models\Borrowing::STATUS_LABELS as $value => $label)
+                            <option value="{{ $value }}" @selected(old('status', $borrowing->status) === $value)>{{ $label }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -95,8 +94,8 @@
 
             <div class="mt-8 flex gap-4">
                 <button type="submit"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Update</button>
-                <a href="{{ route('admin.borrowings.show', $borrowing) }}"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Perbarui</button>
+                <a href="{{ request('return_to', route('admin.status.index', ['tab' => 'peminjaman'])) }}"
                     class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium">Batal</a>
             </div>
         </form>

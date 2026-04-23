@@ -6,7 +6,7 @@
     <div class="mb-8">
         <h1 class="text-4xl font-bold text-gray-900">Edit Pengembalian</h1>
         <p class="text-gray-600">Perbarui data pengembalian #{{ $return_model->id }}</p>
-         <a href="{{ route('admin.returns.index') }}"
+         <a href="{{ request('return_to', route('admin.status.index', ['tab' => 'pengembalian'])) }}"
             class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-lg shadow">
             ← Kembali
         </a>
@@ -20,7 +20,7 @@
             <div class="mb-6">
                 <p class="text-sm text-gray-600">Peminjam</p>
                 <p class="font-medium">{{ $return_model->borrowing->user->name }}</p>
-                <p class="text-sm text-gray-600 mt-2">Alat: {{ $return_model->borrowing->tool->name }}</p>
+                <p class="text-sm text-gray-600 mt-2">Buku: {{ $return_model->borrowing->tool->name }}</p>
             </div>
 
             <div class="mb-6">
@@ -33,7 +33,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="condition" class="block text-gray-700 font-medium mb-2">Kondisi Alat <span
+                <label for="condition" class="block text-gray-700 font-medium mb-2">Kondisi Buku <span
                         class="text-red-500">*</span></label>
                 <select id="condition" name="condition" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('condition') border-red-500 @enderror">
@@ -53,8 +53,8 @@
 
             <div class="flex gap-4">
                 <button type="submit"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Update</button>
-                <a href="{{ route('admin.returns.show', $return_model) }}"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Perbarui</button>
+                <a href="{{ request('return_to', route('admin.status.index', ['tab' => 'pengembalian'])) }}"
                     class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium">Batal</a>
             </div>
         </form>

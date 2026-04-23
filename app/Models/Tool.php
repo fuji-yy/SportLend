@@ -9,7 +9,13 @@ class Tool extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'code', 'name', 'description', 'quantity', 'available', 'condition'];
+    public const CONDITION_LABELS = [
+        'baik' => 'Baik',
+        'rusak_ringan' => 'Rusak Ringan',
+        'rusak_berat' => 'Rusak Berat',
+    ];
+
+    protected $fillable = ['category_id', 'code', 'name', 'description', 'cover_image', 'quantity', 'available', 'condition'];
 
     public function category()
     {
@@ -19,5 +25,10 @@ class Tool extends Model
     public function borrowings()
     {
         return $this->hasMany(Borrowing::class);
+    }
+
+    public function getConditionLabelAttribute(): string
+    {
+        return self::CONDITION_LABELS[$this->condition] ?? ucwords(str_replace('_', ' ', (string) $this->condition));
     }
 }

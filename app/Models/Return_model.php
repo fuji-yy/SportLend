@@ -9,6 +9,12 @@ class Return_model extends Model
 {
     use HasFactory;
 
+    public const CONDITION_LABELS = [
+        'baik' => 'Baik',
+        'rusak_ringan' => 'Rusak Ringan',
+        'rusak_berat' => 'Rusak Berat',
+    ];
+
     protected $table = 'returns';
     protected $fillable = ['borrowing_id', 'return_date', 'quantity_returned', 'condition', 'notes'];
 
@@ -19,5 +25,10 @@ class Return_model extends Model
     public function borrowing()
     {
         return $this->belongsTo(Borrowing::class);
+    }
+
+    public function getConditionLabelAttribute(): string
+    {
+        return self::CONDITION_LABELS[$this->condition] ?? ucwords(str_replace('_', ' ', (string) $this->condition));
     }
 }
