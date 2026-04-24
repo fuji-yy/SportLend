@@ -20,12 +20,12 @@
 
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Username / Email</label>
-                <input type="text" id="email" name="email" required class="w-full px-4 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100" placeholder="Masukkan username atau email">
+                <input type="text" id="email" name="email" required class="w-full px-4 py-3 border border-slate-200 rounded-2xl  bg-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100" placeholder="Masukkan username atau email">
             </div>
 
             <div class="mb-6">
                 <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                <input type="password" id="password" name="password" required class="w-full px-4 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100" placeholder="........">
+                <input type="password" id="password" name="password" required class="w-full px-4 py-3 border border-slate-200 rounded-2xl  bg-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100" placeholder="........">
             </div>
 
             <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-2xl transition">

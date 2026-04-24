@@ -90,7 +90,7 @@
                 data-confirm-message="Apakah anda yakin ingin menghapus peminjaman ini?">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-red-600 hover:text-red-800">Hapus</button>
+                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium">Hapus</button>
             </form>
         @endif
 

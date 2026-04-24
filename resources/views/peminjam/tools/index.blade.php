@@ -81,9 +81,13 @@
                         <a href="{{ route('peminjam.tools.show', $tool) }}" class="text-center bg-slate-200 hover:bg-slate-300 text-slate-800 px-5 py-2 rounded-lg font-medium transition">
                             Lihat
                         </a>
-                        <a href="{{ route('peminjam.borrowings.create', ['tool_id' => $tool->id]) }}" class="text-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition">
-                            Pinjam
-                        </a>
+                        <a href="{{ route('peminjam.borrowings.create', [
+    'tool_id' => $tool->id,
+    'return_to' => url()->current()
+]) }}"
+class="text-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition">
+    Pinjam
+</a>
                     </div>
                 </div>
             </div>

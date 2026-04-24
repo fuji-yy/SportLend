@@ -6,16 +6,12 @@
 <div class="mb-8">
     <h1 class="text-4xl font-bold text-gray-900">Catat Pengembalian</h1>
     <p class="text-gray-600">Catat pengembalian buku dari peminjam</p>
-     <a href="{{ route('admin.returns.index') }}"
-            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-lg shadow">
-            ← Kembali
-        </a>
 </div>
 
 <div class="bg-white rounded-lg shadow p-8 max-w-2xl">
     <form method="POST" action="{{ route('admin.returns.store') }}">
         @csrf
-        
+
         <div class="mb-6">
             <label for="borrowing_id" class="block text-gray-700 font-medium mb-2">Peminjaman <span class="text-red-500">*</span></label>
             <select id="borrowing_id" name="borrowing_id" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('borrowing_id') border-red-500 @enderror">
@@ -53,7 +49,10 @@
 
         <div class="flex gap-4">
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Simpan</button>
-            <a href="{{ route('admin.returns.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium">Batal</a>
+            <a href="{{ route('admin.status.index', ['tab' => 'pengembalian']) }}"
+    class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg font-medium">
+    Batal
+</a>
         </div>
     </form>
 </div>

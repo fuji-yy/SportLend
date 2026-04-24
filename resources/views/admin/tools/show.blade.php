@@ -9,7 +9,7 @@
     <div class="mt-6">
         <a href="{{ route('admin.tools.index') }}"
             class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-lg shadow">
-            ← Kembali
+            Kembali
         </a>
     </div>
 </div>

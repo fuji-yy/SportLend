@@ -6,10 +6,7 @@
     <div class="mb-8">
         <h1 class="text-4xl font-bold text-gray-900">Tambah Peminjaman</h1>
         <p class="text-gray-600">Buat data peminjaman baru</p>
-           <a href="{{ route('admin.borrowings.index') }}"
-            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-lg shadow">
-            ← Kembali
-        </a>
+
     </div>
 
     <div class="content-panel max-w-3xl rounded-3xl p-8">
@@ -91,8 +88,10 @@
             <div class="mt-8 flex gap-4">
                 <button type="submit"
                     class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Simpan</button>
-                <a href="{{ route('admin.borrowings.index') }}"
-                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium">Batal</a>
+                <a href="{{ route('admin.status.index', ['tab' => 'peminjaman']) }}"
+    class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg font-medium">
+    Batal
+</a>
             </div>
         </form>
     </div>

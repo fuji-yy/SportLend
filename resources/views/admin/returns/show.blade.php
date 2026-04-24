@@ -4,13 +4,14 @@
 
 @section('content')
     <div class="mb-8">
-        <h1 class="text-4xl font-bold text-gray-900">Detail Pengembalian</h1>
-        <p class="text-gray-600">Informasi pengembalian #{{ $return_model->id }}</p>
-        <a href="{{ request('return_to', route('admin.status.index', ['tab' => 'pengembalian'])) }}"
-            class="inline-flex items-center rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white shadow hover:bg-blue-700">
-            < Kembali
-        </a>
-    </div>
+    <h1 class="text-4xl font-bold text-gray-900">Detail Pengembalian</h1>
+    <p class="text-gray-600 mb-4">Informasi pengembalian #{{ $return_model->id }}</p>
+
+    <a href="{{ request('return_to', route('admin.status.index', ['tab' => 'pengembalian'])) }}"
+        class="inline-flex items-center rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white shadow hover:bg-blue-700">
+        Kembali
+    </a>
+</div>
 
     <div class="content-panel max-w-2xl rounded-3xl p-6">
         <div class="grid grid-cols-2 gap-4">
@@ -75,7 +76,7 @@
             data-confirm-message="Apakah anda yakin ingin menghapus pengembalian ini?">
             @csrf
             @method('DELETE')
-            <button type="submit" class="text-red-600 hover:text-red-800">Hapus</button>
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium">Hapus</button>
         </form>
     </div>
 @endsection
